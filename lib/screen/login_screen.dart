@@ -38,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 64,
               ),
+              
               TextFieldInput(
                   textEditingController: _emailController,
                   hintText: "Enter your email",
@@ -53,7 +54,37 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 24,
                   ),
-                  
+                 InkWell(
+                   child: Container(
+                    child: Text('Log in'),
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: ShapeDecoration(
+                      color: blueColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)
+                      )
+                    ),
+                   ),
+                 ) ,
+                 SizedBox(height: 12,),
+                 Flexible(child: Container(),flex: 2,),
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Text("Don't have an account ? "),
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                    ),
+                     GestureDetector(
+                       child: Container(
+                        child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold),),
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                                         ),
+                     )
+                  ],
+                 )
             ],
           ),
         ),
