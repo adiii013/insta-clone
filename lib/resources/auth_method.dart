@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:insta_clone/model/user.dart' as model;
 import 'package:insta_clone/resources/storage_methods.dart';
 
 class AuthMethods {
@@ -18,22 +19,44 @@ class AuthMethods {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           username.isNotEmpty ||
-          bio.isNotEmpty || file !=null) {
+          bio.isNotEmpty ||
+          file != null) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-        String photoUrl =  await StorageMethods().uploadImageToStorage('profilePics', file, false);
-        print(photoUrl);
-        await _firestore.collection('users').doc(cred.user!.uid).set({
-          'username': username,
-          'uid': cred.user!.uid,
-          'bio': bio,
-          'email': email,
-          'followers': [],
-          'following': [],
-          'photoUrl':photoUrl,
-        });
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage('profilePics', file, false);
+
+        model.User user = model.User(
+          bio: bio,
+          username: username,
+          photoUrl: photoUrl,
+          uid: cred.user!.uid,
+          followers: [],
+          following: [],
+          email: email
+        );
+
+        await _firestore.collection('users').doc(cred.user!.uid).set(user.toJson());
+        
         res = "success";
+      }
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String res = "Some error occured";
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = "success";
+      } else {
+        res = "Please enter all fields";
       }
     } catch (err) {
       res = err.toString();

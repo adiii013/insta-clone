@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insta_clone/resources/auth_method.dart';
+import 'package:insta_clone/responsive/mobile_screen_layout.dart';
+import 'package:insta_clone/responsive/responsivelayout.dart';
+import 'package:insta_clone/responsive/web_screen_layout.dart';
+import 'package:insta_clone/screen/login_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
 import 'package:insta_clone/utils/utils.dart';
 import 'package:insta_clone/widgets/text_field_input.dart';
@@ -52,7 +56,14 @@ class _SignupScreenState extends State<SignupScreen> {
     });
     if (res != 'success') {
       showSnackBar(res, context);
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const ResponsiveLayout(webScreenLayout: WebScreenLayout(), mobileScreenLayout: MobileScreenLayout())));
     }
+  }
+
+  void navigateToSignin() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
   @override
@@ -131,9 +142,11 @@ class _SignupScreenState extends State<SignupScreen> {
               InkWell(
                 onTap: signupUser,
                 child: Container(
-                  child: _isLoading ? CircularProgressIndicator(
-                    color: primaryColor,
-                  ) : Text('Sign up'),
+                  child: _isLoading
+                      ? CircularProgressIndicator(
+                          color: primaryColor,
+                        )
+                      : Text('Sign up'),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(vertical: 12),
@@ -154,13 +167,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: Text("Don't have an account ? "),
+                    child: Text("Already have an account ? "),
                     padding: EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
+                    onTap: navigateToSignin,
                     child: Container(
                       child: Text(
-                        "Sign up",
+                        "Sign in",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 8),
