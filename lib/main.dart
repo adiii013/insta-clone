@@ -7,7 +7,6 @@ import 'package:insta_clone/responsive/mobile_screen_layout.dart';
 import 'package:insta_clone/responsive/responsivelayout.dart';
 import 'package:insta_clone/responsive/web_screen_layout.dart';
 import 'package:insta_clone/screen/login_screen.dart';
-import 'package:insta_clone/screen/signup_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +36,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData.dark(),
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: mobileBackgroundColor,
+          ),
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
