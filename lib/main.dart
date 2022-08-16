@@ -16,11 +16,11 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "AIzaSyBzJ4IfYh07Dr7OPr6qjKJ4zfchHbZcP1M",
-        appId: "1:428023712508:web:9c46dd4a6266f5a14d6579",
-        messagingSenderId: "428023712508",
-        projectId: "insta-clone-46e7f",
-        storageBucket: "insta-clone-46e7f.appspot.com"
+        apiKey: "demo",
+        appId: "demo",
+        messagingSenderId: "demo",
+        projectId: "demo",
+        storageBucket: "demo"
       ),
     );
   } else {
