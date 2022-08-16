@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.insta_clone">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="InstaClone"
         android:name="${applicationName}"
