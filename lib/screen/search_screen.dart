@@ -22,16 +22,19 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
         title: Form(
-          child: TextFormField(
-            controller: searchController,
-            decoration:
-                const InputDecoration(labelText: 'Search for a user...'),
-            onFieldSubmitted: (String _) {
-              setState(() {
-                isShowUsers = true;
-              });
-              print(_);
-            },
+          child: Container(
+            padding: EdgeInsets.all(10),
+            child: TextFormField(
+              controller: searchController,
+              decoration:
+                  const InputDecoration(labelText: 'Search for a user...'),
+              onFieldSubmitted: (String _) {
+                setState(() {
+                  isShowUsers = true;
+                });
+                print(_);
+              },
+            ),
           ),
         ),
       ),
