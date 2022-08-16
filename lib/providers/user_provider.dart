@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:insta_clone/model/user.dart';
 import 'package:insta_clone/resources/auth_method.dart';
 
-class userProvider with ChangeNotifier {
+class UserProvider with ChangeNotifier {
   User? _user;
   final AuthMethods _authMethods = AuthMethods();
+
   User get getUser => _user!;
 
   Future<void> refreshUser() async {
